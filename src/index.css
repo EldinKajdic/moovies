@@ -58,12 +58,25 @@ section {
 
 .results .result {
   width: 33.333%;
-  min-width: 250px;
+  min-width: 300px;
   padding: 15px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
   transition: 0.4s ease-out;
+  float: left;
+}
+
+.results .result .result-footer {
+  font-weight: 600;
+  padding: 10px;
+  background: #0b0c0e;
+  flex: 1 1 100%;
+  transition: 0.4s ease-out;
+  text-align: center;
+  min-height: 70px;
+  max-height: 70px;
+  overflow: auto;
 }
 
 .results .result:hover {
@@ -80,12 +93,6 @@ section {
 .results .result h3 {
   color: #fff;
   font-size: 20px;
-  font-weight: 600;
-  padding: 10px;
-  background: #0b0c0e;
-  flex: 1 1 100%;
-  transition: 0.4s ease-out;
-  text-align: center;
 }
 
 .popup {
@@ -165,5 +172,13 @@ section {
 .total-results {
   width: 100%;
   margin-left: 15px;
+  color: #fff;
+}
+
+.scroll-container {
+  width: 100% !important;
+}
+
+.loading-text {
   color: #fff;
 }

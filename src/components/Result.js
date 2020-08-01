@@ -4,9 +4,11 @@ function Result({ result, openPopup }) {
   return (
     <div className="result" onClick={() => openPopup(result.imdbID)}>
       <img src={result.Poster} alt="Poster" />
-      <h3>
-        {result.Title} ({result.Year})
-      </h3>
+      <div className="result-footer">
+        <h3>
+          {result.Title} ({result.Year})
+        </h3>
+      </div>
     </div>
   );
 }
