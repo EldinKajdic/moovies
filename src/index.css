@@ -182,3 +182,30 @@ section {
 .loading-text {
   color: #fff;
 }
+
+.inline {
+  margin-left: 15px;
+}
+
+.filter-results {
+  color: #fff;
+}
+
+.filter-results .filter-checkbox {
+  color: white !important;
+  margin-left: 10px;
+  margin-bottom: 2px;
+}
+
+.info-section {
+  text-align: center;
+  color: #FFF;
+}
+
+.info-section h1 {
+  font-size: 48px;
+}
+
+.info-section h2 {
+  margin-top: 10px;
+}

@@ -12,12 +12,13 @@ function App() {
     selected: {},
     currentPage: 0,
     resultsFound: false,
+    hasMore: true,
   });
 
   const baseURL = "http://omdbapi.com/?apikey=44d38241";
 
   const search = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && state.s !== "") {
       axios(baseURL + "&s=" + state.s).then(({ data }) => {
         let results = data.Search;
         let resultsFound = data.Response;
@@ -30,6 +31,7 @@ function App() {
             currentPage: 1,
             resultsFound,
             lastSearch: state.s,
+            hasMore: true,
           };
         });
       });
@@ -39,7 +41,12 @@ function App() {
   const fetchNextPage = () => {
     let page = state.currentPage + 1;
     axios(baseURL + "&s=" + state.s + "&page=" + page).then(({ data }) => {
-      if (!data.Search) return;
+      if (!data.Search) {
+        setState((prevState) => {
+          return { ...prevState, hasMore: false };
+        });
+        return;
+      }
 
       let newResults = data.Search;
       setState((prevState) => {
@@ -47,6 +54,7 @@ function App() {
           ...prevState,
           results: [...prevState.results, ...newResults],
           currentPage: prevState.currentPage + 1,
+          hasMore: true,
         };
       });
     });
@@ -88,6 +96,7 @@ function App() {
           search={state.lastSearch}
           fetchNextPage={fetchNextPage}
           resultsFound={state.resultsFound}
+          hasMore={state.hasMore}
         />
         {typeof state.selected.Title != "undefined" ? (
           <Popup selected={state.selected} closePopup={closePopup} />
@@ -95,6 +104,12 @@ function App() {
           false
         )}
       </main>
+      {state.results && state.results.length === 0 && (
+        <section className="info-section">
+          <h1>Welcome to Moovies!</h1>
+          <h2>Start by searching for a movie, a series or an episode.</h2>
+        </section>
+      )}
     </div>
   );
 }
